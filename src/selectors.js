@@ -101,8 +101,8 @@ const extractAnimeDetails = dom => {
 const extractVideoSources = dom => {
   const videosRAW = extractVariableValue(dom, 'var videos') || '{}'
   const { SUB: videos } = JSON.parse(videosRAW)
-  const videoSources = videos.map(item => item.code)
-  const downloadLink = extractDownloadLink(videos)
+  const videoSources = videos ? videos.map(item => item.code) : ''
+  const downloadLink = videos ? extractDownloadLink(videos) : ''
 
   return {
     videos: videoSources,

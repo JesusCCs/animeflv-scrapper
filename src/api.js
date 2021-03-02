@@ -26,7 +26,15 @@ const getAllAnimes = async () => {
   return formatedAnimes
 }
 
-const searchAnime = async (query, params) => getAnimes({ q: query, ...params })
+const searchAnime = async (query) => {
+  const { data } = await apiCall.get(`/browse`, {
+    baseURL,
+    transformResponse: parseHTML,
+    params: { q: query },
+  })
+
+  return extractAnimeList(data)
+}
 
 const getAnimes = async params => {
   const { data } = await apiCall.get(`/browse`, {
